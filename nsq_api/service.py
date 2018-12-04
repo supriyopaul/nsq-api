@@ -119,6 +119,9 @@ class NsqServer(BaseScript):
 
 
     def _parse_master_args(self):
+
+        if self.args.no_master: return None
+
         master = AttrDict()
         try:
             m = self.args.master.split(':')
@@ -163,21 +166,22 @@ class NsqServer(BaseScript):
         ])
 
     def start(self):
-
         self.actively_tailing = dict()
         self.master = self._parse_master_args()
         self.host = self.args.host
         self.port = self.args.port
 
-        register_response = self.register_to_master()
-        if register_response['result']['success']:
-            self.log.info('authentication_passed')
-            app = self.prepare_api()
-            app.listen(self.args.port)
+        if not self.master:
+            self.log.info('no_master')
+
         else:
-            raise Exception(register_response['result']['details'])
+            register_response = self.register_to_master()
+            if register_response.get('result', {}).get('success', {}): self.log.info('authentication_passed')
+            else: raise Exception(register_response.get('result', {}).get('details', {}))
 
         try:
+            app = self.prepare_api()
+            app.listen(self.args.port)
             tornado.ioloop.IOLoop.current().start()
         except KeyboardInterrupt:
             # FIXME: cleanup if exited
@@ -199,8 +203,10 @@ class NsqServer(BaseScript):
                 default=socket.gethostname(),
                 help='Hostname of this service for other components to contact to, default: %(default)s')
         runserver_cmd.add_argument('-m', '--master',
-                required=True,
                 help='Master address, format: host=<hostname>:port=<port>:key=<master_key>:secret=<master_secret>')
+        runserver_cmd.add_argument('-n', '--no-master',
+                action='store_true',
+                help= 'If NSQ-API is to run independently, without a master service')
 
 def main():
     NsqServer().start()

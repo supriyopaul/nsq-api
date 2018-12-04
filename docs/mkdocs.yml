@@ -1,0 +1,7 @@
+site_name: nsq-api
+nav:
+        - Overview: index.md
+        - nsq-api: nsq_api.md
+
+theme: readthedocs
+
