@@ -14,7 +14,7 @@ setup(
     ],
     install_requires=[
         "tornado",
-        "basescript==0.2.6",
+        "basescript==0.2.9",
         "nsq-py==0.1.10",
         "logagg-utils==0.5.0"
     ],
