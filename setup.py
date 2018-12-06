@@ -28,7 +28,6 @@ setup(
         "Operating System :: OS Independent",
         "License :: OSI Approved :: MIT License",
     ],
-    test_suite='test.suite_maker',
     entry_points={
         "console_scripts": [
             "nsq-api = nsq_api:main",
