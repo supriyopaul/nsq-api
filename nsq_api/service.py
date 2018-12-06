@@ -30,47 +30,43 @@ class NsqAPI(tornado.web.RequestHandler):
         query_arguments: {'topic': ['Heartbeat'], 'nsqd_tcp_address': ['195.201.98.142:4150']}
         '''
 
-        nsqd_tcp_addresses=query_arguments['nsqd_tcp_address']
+        nsqd_tcp_addresses = query_arguments['nsqd_tcp_address'][0]
+        nsqd_http_address = query_arguments['nsqd_http_address'][0]
         topic = query_arguments['topic'][0]
         if query_arguments.get('empty_lines') == ['yes']:
             empty_lines = True
         else:
             empty_lines = False
 
-        return nsqd_tcp_addresses, topic, empty_lines
+        return nsqd_tcp_addresses, nsqd_http_address, topic, empty_lines
 
-    def _remove_channel(self, nsqd_host,
+    def _remove_channel(self, nsqd_http_address,
             topic, channel):
         '''
         Delete a Nsq channel
         '''
-
-        nsqd_http_port = '4151'
-        nsqd_http_address = nsqd_host + ':' + nsqd_http_port
-
         requests.post(self.DELETE_CHANNEL_URL.format(nsqd_http_address,
             topic, channel))
 
     @gen.coroutine
     def get(self):
         '''
-        Sample uri: /tail?nsqd_tcp_address=localhost:4150&topic=Heartbeat&empty_lines='yes/no'
+        Sample uri: /tail?nsqd_tcp_address=localhost:4150&nsqd_http_address=localhost:4151&topic=Heartbeat&empty_lines='yes/no'
         '''
         loop = tornado.ioloop.IOLoop.current()
 
-        nsqd_tcp_addresses, topic, empty_lines = self._parse_query(self.request.query_arguments)
+        nsqd_tcp_addresses, nsqd_http_address, topic, empty_lines = self._parse_query(self.request.query_arguments)
         channel = generate_random_string(self.CHANNEL_NAME_LENGTH)
-        nsqd_host = nsqd_tcp_addresses[0].split(':')[0]
 
 
-        nsq_reader = Reader(nsqd_tcp_addresses=nsqd_tcp_addresses,
+        nsq_reader = Reader(nsqd_tcp_addresses=[nsqd_tcp_addresses],
                 topic=topic,
                 channel=channel,
                 max_in_flight=self.NSQ_MAX_IN_FLIGHT)
 
         def cleanup():
             nsq_reader.close()
-            self._remove_channel(nsqd_host=nsqd_host,
+            self._remove_channel(nsqd_http_address=nsqd_http_address,
                     topic=topic, channel=channel)
             self.log.debug('channel_deleted', channel=channel)
             self.finish()
