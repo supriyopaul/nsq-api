@@ -19,7 +19,7 @@ deploy:
     skip_cleanup: true
     user: "deepcompute"
     password:
-        secure: "bvWKq4vX5dtqLQYF3bFwUW4VRvJiBrAq5FvzMUyd9my3XrgHrFgrAiuw16znRBfKHn7Lr6FppL1dhr3Xk//ms1wXiiqk8bZL1L4ttg1hWAWdM/k+k/Z23grLv3liMA9gELyCSqpYMm9jGkbJdlK2zzJQhf5lyGZ4VQjr9OhkOOhVmFysbGEwQYR52RJzhgGAXMz6lwxh5a1HzyLxkmuVhvqml/B0IoD5m0AKN0WBEEZucc6GU+wFGbKKpy53ofO638YpVVaTuSN0aB8rbWzGw1t4RNGLKDuH7+n2el8AbML9qXr9MwETLgmdEOdd27a0akopwPCFHiu4xQu6aRltH9rX5L4dilhNhixYjuCAwxlvcXntQOrzUtsgY0nlvg7qnV6pcZ/+zlgdFn0OwCI0bL7EryfeAmNLgd3wsCamxFuH90EVvorOqCZw0AEF4orLrvpAhu1iesrtwL3lXBL+GhGzh37//u0tEjK+Jc8gJ3v/ncl+yZWBjjaLs8lByg4kESv7Di2CS7adTxfI4XI7LWHOQOxvaZ3RZ5qisZzh7YjvXXzzSAZUeKDytQvAN+U3F/uv/LH9mwJYDV238RYDfGuMz+KR9fk1T7Mpc6bBRCVMqKrJk35Q9NaiVGbBloMv9gfA6pGLRq79ByBKannqWnRpbkdZjsRjO24OEbROz6I="
+      secure: "QJAtxE4U5Lt/YDjpmvSz8vb/i49CJktKYc4aVoEmHMlTUuquNLPzFd5r9VzkKkY9EocvZ9k/crnboqji9eIoraRjCQUPQVk6YhRA+nggJY1ZkeImrgNw9RCjNSGWoulW0nMjuHz/x1jKnEvaCI/dFndv9ap/QdUfRfwVsXSEIzyVEwxowYCyiJEYKRBNP5xqQxyfV1AdOM8Z7hWiBL0LYSt0XHpjVgdy44ZYnRkH+DilqpTDqp9dUGWHukxqwxiN7RsFnBZU4m/zdYrj6HyG8RegfP+EpirrPRsz6ECrBjngtehrvcZdvP9t0txEEOsYahrW71B23uj2VR+Xwx6M1STk8KKAQfnB2y3yzJEqQMejIQ0HIZ4YIKk/tdD7ktBUyJ9NN9AK0/hVAhrSlXAdCH9QpfZ7019fM0r3GJi/z3TWDFBjuyiKWrRjijdO2nvfKfgVKjWbX+sUALt/6JOzHOGIaXCqzpkyrVAiWzxDqewauzfaaYhxlQmzfFomJeYrIdsCggp8cZm2DaMqIGNqAlc/GXwUnWXA+Plh+1zyzDBDwnuLx+QzFWD99M5ipCPnsrHAkavDEZ4R2k66M/WBXVMqp0oPGj7KhI6DjfyWNV+rp4JIKRJDsWf+j+cY3LM4Hgo8pt1UfQSuoVniAD5MnqcEnn2S+wuEgDpVk14Q/dc="
     on:
-        branch: master
-        tags: true
+      branch: master
+      tags: true
