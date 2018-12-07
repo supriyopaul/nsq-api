@@ -11,7 +11,6 @@ from nsq.reader import Reader, Message
 from basescript import BaseScript
 from deeputil import generate_random_string, AttrDict, keeprunning 
 from logagg_utils import NSQSender
-from logagg_utils import InvalidArgument, AuthenticationFailure
 from logagg_utils import start_daemon_thread, log_exception
 
 class NsqAPI(tornado.web.RequestHandler):
@@ -135,8 +134,9 @@ class NsqServer(BaseScript):
                 elif a[0] == 'secret': master.secret = a[-1]
                 else: raise ValueError
         except ValueError:
-            raise InvalidArgument(self.args.master)
-
+            raise Exception('Invalid Argument', self.args.master)
+        if not master.keys() == ['host', 'port', 'key', 'secret']:
+            raise Exception('Invalid Argument', self.args.master)
         return master
  
 

@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 setup(
     name="nsq_api",
-    version="0.0.1",
+    version="0.0.2",
     description="API to read logs from NSQ for logagg",
     keywords="nsq-api",
     author="Deep Compute, LLC",
@@ -16,7 +16,7 @@ setup(
         "tornado",
         "basescript==0.2.9",
         "nsq-py==0.1.10",
-        "logagg-utils==0.5.0"
+        "logagg-utils==0.5.2"
     ],
     packages=find_packages('.'),
     include_package_data=True,
