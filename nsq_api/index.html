@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Nsq api - nsq-api</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Nsq api";
+    var mkdocs_page_input_path = "nsq_api.md";
+    var mkdocs_page_url = "/nsq_api/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> nsq-api</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Nsq api</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#prerequisites">Prerequisites</a></li>
+    
+
+    <li class="toctree-l2"><a href="#installation">Installation</a></li>
+    
+
+    <li class="toctree-l2"><a href="#run-nsq-api-service">Run nsq-api service</a></li>
+    
+
+    <li class="toctree-l2"><a href="#send-messages-to-a-topic-in-nsq">Send messages to a topic in NSQ</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#install-the-nsq-package-at-where-we-need-to-bring-up-the-nsq-server">Install the nsq package, at where we need to bring up the nsq server.</a></li>
+        
+            <li><a class="toctree-l3" href="#bring-up-the-nsq-instances-at-the-required-server-with-following-commands">Bring up the nsq instances at the required server with following commands:</a></li>
+        
+            <li><a class="toctree-l3" href="#sending-messages-to-nsq-topic">Sending messages to NSQ topic</a></li>
+        
+            <li><a class="toctree-l3" href="#read-logs-from-a-nsq-topic-using-nsq-api">Read logs from a NSQ topic using nsq-api</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">nsq-api</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Nsq api</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Python = 2.7</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Install nsq-api package to start the service.</p>
+<pre><code>pip install git+https://github.com/deep-compute/nsq-api.git
+</code></pre>
+
+<h2 id="run-nsq-api-service">Run nsq-api service</h2>
+<p>Start service without a <a href="https://github.com/deep-compute/logagg-master">logagg-master</a>.</p>
+<pre><code>$ nsq-api runserver --host &lt;IP/DNS&gt; --port &lt;port_number&gt; --no-master
+</code></pre>
+
+<p>Start service and register it to <a href="https://github.com/deep-compute/logagg-master">logagg-master</a>.</p>
+<pre><code>nsq-api runserver --host &lt;IP/DNS&gt; --port &lt;port_number&gt; --master host=&lt;master_host&gt;:port=&lt;master_port&gt;:key=&lt;master_key&gt;:secret=&lt;master_secret&gt;
+</code></pre>
+
+<h2 id="send-messages-to-a-topic-in-nsq">Send messages to a topic in NSQ</h2>
+<h6 id="install-the-nsq-package-at-where-we-need-to-bring-up-the-nsq-server"><a href="http://nsq.io/deployment/installing.html">Install</a> the <code>nsq</code> package, at where we need to bring up the <code>nsq</code> server.</h6>
+<ul>
+<li>Run the following commands to install <code>nsq</code>:</li>
+</ul>
+<pre><code>$ sudo apt-get install libsnappy-dev
+$ wget https://s3.amazonaws.com/bitly-downloads/nsq/nsq-1.0.0-compat.linux-amd64.go1.8.tar.gz
+$ tar zxvf nsq-1.0.0-compat.linux-amd64.go1.8.tar.gz
+$ sudo cp nsq-1.0.0-compat.linux-amd64.go1.8/bin/* /usr/local/bin
+</code></pre>
+
+<h6 id="bring-up-the-nsq-instances-at-the-required-server-with-following-commands">Bring up the <code>nsq</code> instances at the required server with following commands:</h6>
+<ul>
+<li><strong>NOTE:</strong> Run each command in a seperate Terminal window</li>
+<li>nsqlookupd</li>
+</ul>
+<pre><code>$ nsqlookupd
+</code></pre>
+
+<ul>
+<li>nsqd -lookupd-tcp-address <em>&lt;ip-addr or DNS></em>:4160</li>
+</ul>
+<pre><code>$ nsqd -lookupd-tcp-address localhost:4160
+</code></pre>
+
+<ul>
+<li>nsqadmin -lookupd-http-address <em>&lt;ip-addr or DNS></em>:4161</li>
+</ul>
+<pre><code>$ nsqadmin -lookupd-http-address localhost:4161
+</code></pre>
+
+<h6 id="sending-messages-to-nsq-topic">Sending messages to NSQ topic</h6>
+<pre><code>$ apt install curl
+$ for i in {1..500}; do curl -d 'This is message number: '$i 'http://localhost:4151/pub?topic=test'; sleep 1; done
+OKOKOKOKOKOKOKOKOK...
+</code></pre>
+
+<h6 id="read-logs-from-a-nsq-topic-using-nsq-api">Read logs from a NSQ topic using nsq-api</h6>
+<pre><code>$ curl &quot;http://localhost:4444/tail?nsqd_tcp_address=localhost:4150&amp;topic=test&amp;empty_lines=no&quot;
+...
+This is message number: 10
+This is message number: 11
+This is message number: 12
+This is message number: 13
+...
+...
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "nsq-api\n\n\nAPI to read logs from \nNSQ\n topics.\nReturns a streaming response off a randomly named channel which is deleted after the stream is closed.\n\n\nPrerequisites\n\n\n\n\nPython = 2.7",
+            "title": "Home"
+        },
+        {
+            "location": "/#nsq-api",
+            "text": "API to read logs from  NSQ  topics.\nReturns a streaming response off a randomly named channel which is deleted after the stream is closed.",
+            "title": "nsq-api"
+        },
+        {
+            "location": "/#prerequisites",
+            "text": "Python = 2.7",
+            "title": "Prerequisites"
+        },
+        {
+            "location": "/nsq_api/",
+            "text": "Prerequisites\n\n\n\n\nPython = 2.7\n\n\n\n\nInstallation\n\n\nInstall nsq-api package to start the service.\n\n\npip install git+https://github.com/deep-compute/nsq-api.git\n\n\n\n\nRun nsq-api service\n\n\nStart service without a \nlogagg-master\n.\n\n\n$ nsq-api runserver --host <IP/DNS> --port <port_number> --no-master\n\n\n\n\nStart service and register it to \nlogagg-master\n.\n\n\nnsq-api runserver --host <IP/DNS> --port <port_number> --master host=<master_host>:port=<master_port>:key=<master_key>:secret=<master_secret>\n\n\n\n\nSend messages to a topic in NSQ\n\n\nInstall\n the \nnsq\n package, at where we need to bring up the \nnsq\n server.\n\n\n\n\nRun the following commands to install \nnsq\n:\n\n\n\n\n$ sudo apt-get install libsnappy-dev\n$ wget https://s3.amazonaws.com/bitly-downloads/nsq/nsq-1.0.0-compat.linux-amd64.go1.8.tar.gz\n$ tar zxvf nsq-1.0.0-compat.linux-amd64.go1.8.tar.gz\n$ sudo cp nsq-1.0.0-compat.linux-amd64.go1.8/bin/* /usr/local/bin\n\n\n\n\nBring up the \nnsq\n instances at the required server with following commands:\n\n\n\n\nNOTE:\n Run each command in a seperate Terminal window\n\n\nnsqlookupd\n\n\n\n\n$ nsqlookupd\n\n\n\n\n\n\nnsqd -lookupd-tcp-address \n<ip-addr or DNS>\n:4160\n\n\n\n\n$ nsqd -lookupd-tcp-address localhost:4160\n\n\n\n\n\n\nnsqadmin -lookupd-http-address \n<ip-addr or DNS>\n:4161\n\n\n\n\n$ nsqadmin -lookupd-http-address localhost:4161\n\n\n\n\nSending messages to NSQ topic\n\n\n$ apt install curl\n$ for i in {1..500}; do curl -d 'This is message number: '$i 'http://localhost:4151/pub?topic=test'; sleep 1; done\nOKOKOKOKOKOKOKOKOK...\n\n\n\n\nRead logs from a NSQ topic using nsq-api\n\n\n$ curl \"http://localhost:4444/tail?nsqd_tcp_address=localhost:4150&topic=test&empty_lines=no\"\n...\nThis is message number: 10\nThis is message number: 11\nThis is message number: 12\nThis is message number: 13\n...\n...",
+            "title": "Nsq api"
+        },
+        {
+            "location": "/nsq_api/#prerequisites",
+            "text": "Python = 2.7",
+            "title": "Prerequisites"
+        },
+        {
+            "location": "/nsq_api/#installation",
+            "text": "Install nsq-api package to start the service.  pip install git+https://github.com/deep-compute/nsq-api.git",
+            "title": "Installation"
+        },
+        {
+            "location": "/nsq_api/#run-nsq-api-service",
+            "text": "Start service without a  logagg-master .  $ nsq-api runserver --host <IP/DNS> --port <port_number> --no-master  Start service and register it to  logagg-master .  nsq-api runserver --host <IP/DNS> --port <port_number> --master host=<master_host>:port=<master_port>:key=<master_key>:secret=<master_secret>",
+            "title": "Run nsq-api service"
+        },
+        {
+            "location": "/nsq_api/#send-messages-to-a-topic-in-nsq",
+            "text": "",
+            "title": "Send messages to a topic in NSQ"
+        },
+        {
+            "location": "/nsq_api/#install-the-nsq-package-at-where-we-need-to-bring-up-the-nsq-server",
+            "text": "Run the following commands to install  nsq :   $ sudo apt-get install libsnappy-dev\n$ wget https://s3.amazonaws.com/bitly-downloads/nsq/nsq-1.0.0-compat.linux-amd64.go1.8.tar.gz\n$ tar zxvf nsq-1.0.0-compat.linux-amd64.go1.8.tar.gz\n$ sudo cp nsq-1.0.0-compat.linux-amd64.go1.8/bin/* /usr/local/bin",
+            "title": "Install the nsq package, at where we need to bring up the nsq server."
+        },
+        {
+            "location": "/nsq_api/#bring-up-the-nsq-instances-at-the-required-server-with-following-commands",
+            "text": "NOTE:  Run each command in a seperate Terminal window  nsqlookupd   $ nsqlookupd   nsqd -lookupd-tcp-address  <ip-addr or DNS> :4160   $ nsqd -lookupd-tcp-address localhost:4160   nsqadmin -lookupd-http-address  <ip-addr or DNS> :4161   $ nsqadmin -lookupd-http-address localhost:4161",
+            "title": "Bring up the nsq instances at the required server with following commands:"
+        },
+        {
+            "location": "/nsq_api/#sending-messages-to-nsq-topic",
+            "text": "$ apt install curl\n$ for i in {1..500}; do curl -d 'This is message number: '$i 'http://localhost:4151/pub?topic=test'; sleep 1; done\nOKOKOKOKOKOKOKOKOK...",
+            "title": "Sending messages to NSQ topic"
+        },
+        {
+            "location": "/nsq_api/#read-logs-from-a-nsq-topic-using-nsq-api",
+            "text": "$ curl \"http://localhost:4444/tail?nsqd_tcp_address=localhost:4150&topic=test&empty_lines=no\"\n...\nThis is message number: 10\nThis is message number: 11\nThis is message number: 12\nThis is message number: 13\n...\n...",
+            "title": "Read logs from a NSQ topic using nsq-api"
+        }
+    ]
+}
