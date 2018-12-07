@@ -29,10 +29,9 @@ class NsqAPI(tornado.web.RequestHandler):
         '''
         query_arguments: {'topic': ['Heartbeat'], 'nsqd_tcp_address': ['195.201.98.142:4150']}
         '''
-
-        nsqd_tcp_addresses = query_arguments['nsqd_tcp_address'][0]
-        nsqd_http_address = query_arguments['nsqd_http_address'][0]
-        topic = query_arguments['topic'][0]
+        nsqd_tcp_addresses = query_arguments.get('nsqd_tcp_address', [''])[0]
+        nsqd_http_address = query_arguments.get('nsqd_http_address', [''])[0]
+        topic = query_arguments.get('topic', [''])[0]
         if query_arguments.get('empty_lines') == ['yes']:
             empty_lines = True
         else:
@@ -56,55 +55,62 @@ class NsqAPI(tornado.web.RequestHandler):
         loop = tornado.ioloop.IOLoop.current()
 
         nsqd_tcp_addresses, nsqd_http_address, topic, empty_lines = self._parse_query(self.request.query_arguments)
-        channel = generate_random_string(self.CHANNEL_NAME_LENGTH)
+        if not nsqd_tcp_addresses:
+            self.finish('nsqd_tcp_addresses not found')
+        elif not nsqd_http_address:
+            self.finish('nsqd_http_address not found')
+        elif not topic:
+            self.finish('topic not found')
+        else:
+            channel = generate_random_string(self.CHANNEL_NAME_LENGTH)
 
 
-        nsq_reader = Reader(nsqd_tcp_addresses=[nsqd_tcp_addresses],
-                topic=topic,
-                channel=channel,
-                max_in_flight=self.NSQ_MAX_IN_FLIGHT)
+            nsq_reader = Reader(nsqd_tcp_addresses=[nsqd_tcp_addresses],
+                    topic=topic,
+                    channel=channel,
+                    max_in_flight=self.NSQ_MAX_IN_FLIGHT)
 
-        def cleanup():
-            nsq_reader.close()
-            self._remove_channel(nsqd_http_address=nsqd_http_address,
-                    topic=topic, channel=channel)
-            self.log.debug('channel_deleted', channel=channel)
-            self.finish()
-        
-        try:
-            with nsq_reader.connection_checker():
-                start = time.time()
-                msg_list = list()
+            def cleanup():
+                nsq_reader.close()
+                self._remove_channel(nsqd_http_address=nsqd_http_address,
+                        topic=topic, channel=channel)
+                self.log.debug('channel_deleted', channel=channel)
+                self.finish()
+            
+            try:
+                with nsq_reader.connection_checker():
+                    start = time.time()
+                    msg_list = list()
 
-                while True:
-                    if self.request.connection.stream.closed():
-                        self.log.info('stream_closed')
-                        cleanup()
-                        break
-                    
-                    msg = nsq_reader.read()
-                    for m in msg:
-                        self.log.debug('preparing_list', nsqd_tcp_addresses=nsqd_tcp_addresses, topic=topic, channel=channel)
-                        if isinstance(m, Message):
-                            msg_list.append(m.body + '\n')
-                            m.fin()
+                    while True:
+                        if self.request.connection.stream.closed():
+                            self.log.info('stream_closed')
+                            cleanup()
+                            break
+                        
+                        msg = nsq_reader.read()
+                        for m in msg:
+                            self.log.debug('preparing_list', nsqd_tcp_addresses=nsqd_tcp_addresses, topic=topic, channel=channel)
+                            if isinstance(m, Message):
+                                msg_list.append(m.body + '\n')
+                                m.fin()
 
-                    if time.time() - start >= 1:
-                        if msg_list:
-                            result = ''.join(msg_list)
-                            self.log.debug('yield', nsqd_tcp_addresses=nsqd_tcp_addresses, topic=topic, channel=channel, result=result)
-                            self.write(result)
-                            yield self.flush()
-                            msg_list = list()
-                            start = time.time()
-                        else:
-                            self.log.debug('empty', nsqd_tcp_addresses=nsqd_tcp_addresses, topic=topic, channel=channel)
-                            if empty_lines: self.write('\n')
-                            yield self.flush()
+                        if time.time() - start >= 1:
+                            if msg_list:
+                                result = ''.join(msg_list)
+                                self.log.debug('yield', nsqd_tcp_addresses=nsqd_tcp_addresses, topic=topic, channel=channel, result=result)
+                                self.write(result)
+                                yield self.flush()
+                                msg_list = list()
+                                start = time.time()
+                            else:
+                                self.log.debug('empty', nsqd_tcp_addresses=nsqd_tcp_addresses, topic=topic, channel=channel)
+                                if empty_lines: self.write('\n')
+                                yield self.flush()
 
-        except KeyboardInterrupt:
-            cleanup()
-            sys.exit(0)
+            except KeyboardInterrupt:
+                cleanup()
+                sys.exit(0)
 
 
 class NsqServer(BaseScript):
