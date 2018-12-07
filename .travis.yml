@@ -1,0 +1,25 @@
+language: python
+python: 2.7
+sudo: true
+install: pip install .
+script: python setup.py test
+deploy:
+  - provider: releases
+    skip_cleanup: true
+    api_key:
+        secure: nvbjwR/MJK42rR1vErFzNC7O9Od7Kuwb3NbbvYooIB6ZDqh0qVHPNgsV12AAExWtfmIfJcyYHqbG3UUUth1ke3BtqWg44pDKu5df0wsT7/LZH0n+vtYCKyHdRGwjrGElZ5wMy+S3o1d3fO7bTZhnbbY/U/L8aPgoIFUafTLia1JCePEmFRwpRBI1l9hDdH9exLGz5Nkzi+l5LNRwisnmsdcnR31XmFArQ/wqPi5DazRvEzAqN3tyEH4U0av4JneM2ROoUSB2AhYBYUVdMWUUSrR/tR4QlOaUPFS9qSXrV3hxEPTVuxbWg3bLnAX4U2MvGCsKf8b+gKruSdN9RDtTgwh+ul99TSEVX/9aqr12g4R4UGM1d05uU337Ror0Sc1prlauKBPsmYLSXmVVKNeeKUAJQYXjWnvJPhNdYoDqCJJRrvpUtqRWcua+Ka8O1yzUakGhe95grjI8FL0eYR5f2laffPm4bnP8Ok0HMQal18WZvu7h9Y8IsUHynipS6AFcjYuxl3U3mgXgF0Mo8c4RK2DqQI6EIVTXFxmOpgXAyV3DLn1M3GyY0l5BR77fGWlr5hl9sXJyv9zYk8Iup9HXaHFAYjftak4iNj0DnyJqI08Srq433GzN6d+d4oyelGCondiRZr3uv582JgUclwMl3jyEKeyArcrUeOri4Hk8vJo=
+    name: nsq-api-0.0.1
+    tag_name: 0.0.1
+    on:
+      repo: deep-compute/nsq-api
+      branch: master
+
+  - provider: pypi
+    distributions: "sdist bdist_wheel"
+    skip_cleanup: true
+    user: "deepcompute"
+    password:
+        secure: "bvWKq4vX5dtqLQYF3bFwUW4VRvJiBrAq5FvzMUyd9my3XrgHrFgrAiuw16znRBfKHn7Lr6FppL1dhr3Xk//ms1wXiiqk8bZL1L4ttg1hWAWdM/k+k/Z23grLv3liMA9gELyCSqpYMm9jGkbJdlK2zzJQhf5lyGZ4VQjr9OhkOOhVmFysbGEwQYR52RJzhgGAXMz6lwxh5a1HzyLxkmuVhvqml/B0IoD5m0AKN0WBEEZucc6GU+wFGbKKpy53ofO638YpVVaTuSN0aB8rbWzGw1t4RNGLKDuH7+n2el8AbML9qXr9MwETLgmdEOdd27a0akopwPCFHiu4xQu6aRltH9rX5L4dilhNhixYjuCAwxlvcXntQOrzUtsgY0nlvg7qnV6pcZ/+zlgdFn0OwCI0bL7EryfeAmNLgd3wsCamxFuH90EVvorOqCZw0AEF4orLrvpAhu1iesrtwL3lXBL+GhGzh37//u0tEjK+Jc8gJ3v/ncl+yZWBjjaLs8lByg4kESv7Di2CS7adTxfI4XI7LWHOQOxvaZ3RZ5qisZzh7YjvXXzzSAZUeKDytQvAN+U3F/uv/LH9mwJYDV238RYDfGuMz+KR9fk1T7Mpc6bBRCVMqKrJk35Q9NaiVGbBloMv9gfA6pGLRq79ByBKannqWnRpbkdZjsRjO24OEbROz6I="
+    on:
+        branch: master
+        tags: true
