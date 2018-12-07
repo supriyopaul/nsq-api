@@ -7,6 +7,7 @@ deploy:
   - provider: releases
     api_key:
       secure: 7Ewi6ZT+m/Grl/x6HrlujUwYRA8U6aWO0JuGOHriXvHqfpVhqGDe2Kz6LEQiWmz/siS/BULAxBytIAyG1rjIHb3gKkB6Ua2XqoYwwYKwJmvwuMaWsaRGD62mIMJNnjjTPjFeWQxKXP0hLppocnjujxBwct3Awfr3PnaOI47GJgSWh/Y1onpW8hzFLLrgUczjxSOKU98MKKy1bLqkGWcM/aQ5fAUCRzijVb9IOx0IE51WKxhlu8Xv6FBwAeLdr24nsjYtvwv2Y6OgIMB50lrkqI35TVXJbINw2/wZj5cSr4kM6pkUXFECVGCkWq0V5PnHPt064hdNO3pV0JdUNj1eY0uCJG8SBY3s4p7DfVxDPF39jAWQ5YDTIxIcJqxzNtOi8KZhFrJGRTn16ejKrk9K7YzAfS7/gFJm0UgAQ96VPC+XQI3ZL95c8C66c3/KGlVDYy0Fs/OVeWNd41JfnWidJIgmzWEeU2TBbHDfeXRwwgjZpmAg8gEks9kt+sQp/5iRemmdmxW5GsoVfBShYclMBDYW2WKkJklquHpgObr0Mr/Bm2J2IQfjHzEDekvos+f3ORQWv+ccvxtUgz5dA/wfp/D11Nh/3VtiFIc9lu2pDKmcfwKm30XL11WMj9mUv5AvnLQ5D7S/SCNxVPG9e4fDFW8q+3SX+WJ7CEOpTMJ/G6I=
+    name: nsq-api-0.0.1
     tag_name: 0.0.1
     on:
       repo: deep-compute/nsq-api
@@ -17,7 +18,7 @@ deploy:
     skip_cleanup: true
     user: deepcompute
     password:
-      secure: QJAtxE4U5Lt/YDjpmvSz8vb/i49CJktKYc4aVoEmHMlTUuquNLPzFd5r9VzkKkY9EocvZ9k/crnboqji9eIoraRjCQUPQVk6YhRA+nggJY1ZkeImrgNw9RCjNSGWoulW0nMjuHz/x1jKnEvaCI/dFndv9ap/QdUfRfwVsXSEIzyVEwxowYCyiJEYKRBNP5xqQxyfV1AdOM8Z7hWiBL0LYSt0XHpjVgdy44ZYnRkH+DilqpTDqp9dUGWHukxqwxiN7RsFnBZU4m/zdYrj6HyG8RegfP+EpirrPRsz6ECrBjngtehrvcZdvP9t0txEEOsYahrW71B23uj2VR+Xwx6M1STk8KKAQfnB2y3yzJEqQMejIQ0HIZ4YIKk/tdD7ktBUyJ9NN9AK0/hVAhrSlXAdCH9QpfZ7019fM0r3GJi/z3TWDFBjuyiKWrRjijdO2nvfKfgVKjWbX+sUALt/6JOzHOGIaXCqzpkyrVAiWzxDqewauzfaaYhxlQmzfFomJeYrIdsCggp8cZm2DaMqIGNqAlc/GXwUnWXA+Plh+1zyzDBDwnuLx+QzFWD99M5ipCPnsrHAkavDEZ4R2k66M/WBXVMqp0oPGj7KhI6DjfyWNV+rp4JIKRJDsWf+j+cY3LM4Hgo8pt1UfQSuoVniAD5MnqcEnn2S+wuEgDpVk14Q/dc=
+      secure: "jEEFcpqH4tvbTYX7t7Y/HFu79aQSIxYwaeAaAgRKrgHyCwODaIgDK0JVkTVI2WDu2RYQXsC/OegF6ievaLe9OWgTOYaaFr9wtMpM/1XHrR1+/vVI/6C2/JcWKwK/Ceg8KfPLR5WSmT269KHl42dmlhtIlgimCCy826BK01vcKR00ZD2dlFlv7Mrmho+5QfRxCE3V2VgrIVukayLgrFLCNb1NZUXwHHd4GFni7S6CNJT46Qc2SJqp/ip5jcNYg795JQaYprTCLs7XWBwrogON+ifQhKoBhOAbIyLTWdSZjWhCFJPgeyTlbZileQzq7ZLHIRGMnvjWhbs4osoZo5Jkh/rvoIxfUPiYqY1/xMDulxrN9vueRds2kK0L9lW5SixpWh8vApzNf4JU0rRILxdUCRUDMt11IZHZjs2ZzHoeRYhiLKs39EYQwORiWbDWhdrKb1kHWfcFubYCGfakzByIj9MT2iRjxQK+AxWxwr5ubec2CpmDrmZJ0aWqxXWUvZm3wcF/MotLPs3L5y8/UWVCUwmqzlAWfUO0NElq5o5FgkaBL1NhoedIQ7j/tXtyrkKDCOdyTqJ21uMA6o+5d8QduO+9xUKWu+pq0uymwISlARFNUrPc2HTVdhVf6+JmQ4TpJJ9i9Umho2fVj9lVFnVTOVRxfK4qAF6C51IOHasT260="
     on:
       branch: master
       tags: true
