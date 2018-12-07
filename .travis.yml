@@ -9,7 +9,7 @@ deploy:
       secure: N4cxtGNNVLpDKpuQe8V1V9S77RDhwPvTTMdKmtqemI1ciny2lrTS+EkPxjCSZ7baz4bm2iwpToQ0B8LjC2lZoJHtqJtFQLkJn7zonaexacVJf5NGDF6xbh332fV97RMC0YeD8TdJ9j2PFNlHx+7+wnU7YGcHRCkocifCh2SOyl6VySqrCiK28sLn9UeB8f9zaakucFUJBYU+BhRTLqZYhmi7I5l291uPPtyBKTnUdGAdafZCRJi5Xkzt+I5rskuj1k7PHtPivrUjfPAUlv6QR4tCuWHM7vzEAo5zPIHMOKafka+pEB5MiqywH200IJY+3P32ksKc3HjUP3Vny5f/BCjGniV8QngGKOsnn/T7wJOlaNDb1ZuX01Q/kkd6MnnVwwrAeWKlKuWqSKQIUY5FVDY8ulFNjZj9Vpd3B3xLKX7VBNPaABYWx2OwuWrkxN2CUe8GL04p40WBx+vYAei/aLC09ukpTPyrwtbnPkL9YU6jKTRR0mpZ4qAbyGIlWCR+z3vEft/Y34P/J1nh0ncrBy7Coy0sGOwF5coWiqWaht6JyoGoPPZxhMb62TqYJ3+gDDSm56mVSVXt5ISe1oSazCeIWpg4T4MKOQCIQHh/CrpQntFAsMxb9thdBBWF99ZnJcoA67InLyUJgtGAxl8Uo1B9ZSmMYdYLsPoBarspLzY=
     on:
       repo: deep-compute/nsq-api
-      branch: travis-credentials-change
+      branch: master
 
   - provider: pypi
     distributions: sdist bdist_wheel
